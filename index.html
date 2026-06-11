@@ -384,10 +384,17 @@
     font-size: 10px;
     letter-spacing: 2.5px;
     color: var(--text-soft);
-    margin-bottom: 40px;
     text-transform: uppercase;
     font-weight: 500;
     backdrop-filter: blur(20px);
+  }
+
+  .hero-tags {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
   }
 
   .hero-tag::before {
@@ -398,6 +405,17 @@
     background: var(--mint);
     box-shadow: 0 0 12px var(--mint);
     animation: livePulse 2s infinite;
+  }
+
+  .hero-tag.open {
+    color: var(--gold);
+    border-color: rgba(252, 211, 77, 0.35);
+    background: rgba(252, 211, 77, 0.06);
+  }
+
+  .hero-tag.open::before {
+    background: var(--gold);
+    box-shadow: 0 0 12px var(--gold);
   }
 
   @keyframes livePulse {
@@ -2308,7 +2326,10 @@
 
     <div class="hero-grid">
       <div class="reveal">
-        <div class="hero-tag">Currently · Payments Ops @ Roku</div>
+        <div class="hero-tags">
+          <div class="hero-tag">Currently · Payments Ops @ Roku</div>
+          <div class="hero-tag open">Open to opportunities</div>
+        </div>
         <div class="hero-name-row">
           <img class="hero-avatar" src="headshot.jpg" alt="Aman Singh" width="132" height="132">
           <h1>Aman<br><span class="em">Singh.</span></h1>
