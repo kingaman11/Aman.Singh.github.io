@@ -3346,6 +3346,47 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
+  // ===== Scroll-triggered count-up on stat numbers =====
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const easeOutCubic = t => 1 - Math.pow(1 - t, 3);
+
+  function countUp(el) {
+    const raw = el.textContent.trim();
+    // split into leading prefix (e.g. "$"), the number (e.g. "2.5"), and trailing suffix (e.g. "K+", "%", "M")
+    const m = raw.match(/^(\D*)([\d,]+(?:\.\d+)?)(.*)$/);
+    if (!m) return;
+    const prefix = m[1];
+    const numStr = m[2].replace(/,/g, '');
+    const suffix = m[3];
+    const target = parseFloat(numStr);
+    if (isNaN(target)) return;
+    const decimals = (numStr.split('.')[1] || '').length;
+    const fmt = v => (decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString('en-US'));
+    const duration = 1500;
+    let startTs = null;
+    function step(ts) {
+      if (startTs === null) startTs = ts;
+      const p = Math.min((ts - startTs) / duration, 1);
+      el.textContent = prefix + fmt(target * easeOutCubic(p)) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = raw; // restore exact original (preserves any formatting nuance)
+    }
+    requestAnimationFrame(step);
+  }
+
+  const countObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        countUp(entry.target);
+        countObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.6 });
+
+  if (!prefersReducedMotion) {
+    document.querySelectorAll('.num').forEach(el => countObserver.observe(el));
+  }
+
   // ===== Keyboard nav =====
   let currentSlide = 0;
   document.addEventListener('keydown', (e) => {
