@@ -1006,6 +1006,104 @@
     font-weight: 300;
   }
 
+  /* ====== LIVE HEALTH BOARD (animated radial gauges) ====== */
+  .health-board {
+    margin-top: 34px;
+    background: rgba(15, 13, 25, 0.6);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px 32px 28px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .health-board::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 1px;
+    background: var(--aurora);
+  }
+
+  .hb-head { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
+
+  .hb-live {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2.5px;
+    font-weight: 600;
+    color: var(--mint);
+  }
+
+  .hb-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--mint);
+    box-shadow: 0 0 12px var(--mint);
+    animation: livePulse 2s infinite;
+  }
+
+  .hb-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--text-muted);
+    text-transform: uppercase;
+  }
+
+  .hb-gauges { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+
+  .gauge { display: flex; flex-direction: column; align-items: center; text-align: center; }
+  .gauge-ring { position: relative; width: 128px; height: 128px; }
+  .gauge-ring svg { width: 128px; height: 128px; }
+
+  .gauge-track { fill: none; stroke: rgba(255, 255, 255, 0.07); stroke-width: 9; }
+
+  .gauge-fill {
+    fill: none;
+    stroke: url(#gaugeGrad);
+    stroke-width: 9;
+    stroke-linecap: round;
+    stroke-dasharray: 326.726;
+    stroke-dashoffset: 326.726;
+    transform: rotate(-90deg);
+    transform-origin: 60px 60px;
+    transition: stroke-dashoffset 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .gauge-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 27px;
+    font-weight: 500;
+    letter-spacing: -0.5px;
+  }
+
+  .gauge-pct { font-size: 14px; opacity: 0.7; margin-left: 1px; }
+  .gauge-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-top: 12px;
+  }
+  .gauge-trend { font-size: 11px; margin-top: 5px; font-weight: 500; }
+  .gauge-trend.up { color: var(--mint); }
+  .gauge-trend.down { color: var(--rose); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gauge-fill { transition: none; }
+  }
+
   /* ====== TENTPOLE ====== */
   .events-grid {
     display: grid;
@@ -2299,6 +2397,41 @@
   .contact-item:hover .value a { color: var(--rose); }
   .contact-item .value a:hover { border-bottom-color: var(--rose); }
 
+  /* ====== DATA-VIZ ADD-ONS (magnitude bars · sparkline · geo map) ====== */
+  /* Before/after magnitude bars */
+  .mag-track { height: 8px; border-radius: 6px; background: rgba(255,255,255,0.06); overflow: hidden; margin: 4px 0 16px; }
+  .mag-fill { height: 100%; border-radius: 6px; width: 0; transition: width 1.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+  /* Trailing auth-rate sparkline */
+  .spark-wrap { max-width: 760px; margin: 20px auto 0; }
+  .spark-head { display: flex; justify-content: space-between; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+  .spark-title { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); }
+  .spark-note { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; color: var(--mint); display: inline-flex; align-items: center; gap: 7px; }
+  .spark-note::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 8px var(--mint); animation: livePulse 2s infinite; }
+  .spark-svg { width: 100%; height: 92px; display: block; }
+  .spark-area { fill: url(#sparkArea); opacity: 0; transition: opacity 1s ease 0.5s; }
+  .spark-line { fill: none; stroke: var(--mint); stroke-width: 2.5; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.9s ease; }
+  .spark-base { stroke: rgba(255,255,255,0.07); stroke-width: 1; vector-effect: non-scaling-stroke; stroke-dasharray: 3 5; }
+
+  /* Geographic coverage map */
+  .geo-map { max-width: 660px; margin: 14px 0 0; }
+  .geo-svg { width: 100%; height: 144px; display: block; overflow: visible; }
+  .geo-grid { fill: none; stroke: rgba(255,255,255,0.08); stroke-width: 1; }
+  .geo-arc { fill: none; stroke: rgba(168,85,247,0.55); stroke-width: 1.4; stroke-dasharray: 4 5; stroke-dashoffset: 0; opacity: 0; transition: opacity 0.9s ease 0.3s; }
+  .geo-node circle.geo-pt { fill: var(--bg-void); stroke: var(--violet); stroke-width: 1.6; }
+  .geo-node text { fill: var(--text-soft); font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1px; }
+  .geo-node.mx circle.geo-pt { fill: var(--rose); stroke: var(--rose); }
+  .geo-node.mx text { fill: var(--rose); }
+  .geo-pulse { fill: none; stroke: var(--rose); }
+  .geo-map.visible .geo-pulse { animation: geoPulse 2.4s ease-out infinite; }
+
+  @keyframes geoPulse { 0% { r: 7; opacity: 0.7; } 100% { r: 30; opacity: 0; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mag-fill, .spark-line, .spark-area, .geo-arc { transition: none; }
+    .geo-map.visible .geo-pulse { animation: none; }
+  }
+
   /* ====== RESPONSIVE (Canva embeds + mobile) ====== */
   @media (max-width: 1200px) {
     .slide { padding: 70px 56px; }
@@ -2646,6 +2779,47 @@
         </div>
       </div>
     </div>
+
+    <div class="health-board reveal">
+      <svg width="0" height="0" style="position:absolute"><defs>
+        <linearGradient id="gaugeGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#6366F1"/>
+          <stop offset="0.5" stop-color="#A855F7"/>
+          <stop offset="1" stop-color="#F472B6"/>
+        </linearGradient>
+      </defs></svg>
+      <div class="hb-head">
+        <span class="hb-live"><span class="hb-dot"></span>LIVE</span>
+        <span class="hb-title">Payment health snapshot · 5 regions · 121 metrics watched daily</span>
+      </div>
+      <div class="hb-gauges">
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 120 120"><circle class="gauge-track" cx="60" cy="60" r="52"/><circle class="gauge-fill" cx="60" cy="60" r="52" data-pct="85"/></svg>
+            <div class="gauge-val">85.0<span class="gauge-pct">%</span></div>
+          </div>
+          <div class="gauge-label">Renewal Auth Rate</div>
+          <div class="gauge-trend up">▲ +51 bps wk/wk</div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 120 120"><circle class="gauge-track" cx="60" cy="60" r="52"/><circle class="gauge-fill" cx="60" cy="60" r="52" data-pct="75.5"/></svg>
+            <div class="gauge-val">75.5<span class="gauge-pct">%</span></div>
+          </div>
+          <div class="gauge-label">Recovery Rate</div>
+          <div class="gauge-trend up">▲ +87 bps wk/wk</div>
+        </div>
+        <div class="gauge">
+          <div class="gauge-ring">
+            <svg viewBox="0 0 120 120"><circle class="gauge-track" cx="60" cy="60" r="52"/><circle class="gauge-fill" cx="60" cy="60" r="52" data-pct="73.2"/></svg>
+            <div class="gauge-val">73.2<span class="gauge-pct">%</span></div>
+          </div>
+          <div class="gauge-label">MoP Tokenization</div>
+          <div class="gauge-trend down">▼ −252 bps wk/wk</div>
+        </div>
+      </div>
+    </div>
+
     <div class="mark">AS · MMXXVI</div>
   </section>
 
@@ -3047,7 +3221,8 @@
           <span style="font-size:13px; color:var(--text-muted);">Reactive &amp; manual</span>
         </div>
         <div style="font-family:'Fraunces',serif; font-weight:800; font-size:60px; line-height:1; color:var(--rose);">~$500K</div>
-        <div style="font-size:13px; color:var(--text-muted); margin:6px 0 20px;">bled by a single unmanaged incident</div>
+        <div class="mag-track"><div class="mag-fill" style="background:var(--rose);" data-w="33"></div></div>
+        <div style="font-size:13px; color:var(--text-muted); margin:2px 0 18px;">bled by a single unmanaged incident</div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14.5px; color:var(--text-soft); line-height:1.4;">
           <li style="display:flex; gap:10px;"><span style="color:var(--rose); flex-shrink:0;">&times;</span><span>Issuer blocks ran <strong style="color:var(--text);">~49 days</strong> before anyone acted</span></li>
           <li style="display:flex; gap:10px;"><span style="color:var(--rose); flex-shrink:0;">&times;</span><span>Incidents found <strong style="color:var(--text);">after</strong> the damage was done</span></li>
@@ -3068,7 +3243,8 @@
           <span style="font-size:13px; color:var(--text-muted);">Proactive &amp; AI-assisted</span>
         </div>
         <div style="font-family:'Fraunces',serif; font-weight:800; font-size:60px; line-height:1; color:var(--mint);">~$1.5M</div>
-        <div style="font-size:13px; color:var(--text-muted); margin:6px 0 20px;">in revenue protected by early detection</div>
+        <div class="mag-track"><div class="mag-fill" style="background:var(--mint);" data-w="100"></div></div>
+        <div style="font-size:13px; color:var(--text-muted); margin:2px 0 18px;">in revenue protected by early detection</div>
         <ul style="list-style:none; display:flex; flex-direction:column; gap:12px; font-size:14.5px; color:var(--text-soft); line-height:1.4;">
           <li style="display:flex; gap:10px;"><span style="color:var(--mint); flex-shrink:0;">&#10003;</span><span><strong style="color:var(--text);">121 metrics</strong> watched daily across 5 regions</span></li>
           <li style="display:flex; gap:10px;"><span style="color:var(--mint); flex-shrink:0;">&#10003;</span><span><strong style="color:var(--text);">Same-day</strong> detection + failover routing</span></li>
@@ -3462,6 +3638,22 @@
   }, { threshold: 0.15 });
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // ===== Live health gauges — fill the radial arc on scroll-in =====
+  (function () {
+    const board = document.querySelector('.health-board');
+    if (!board) return;
+    const CIRC = 326.726; // 2πr, r = 52
+    const fills = board.querySelectorAll('.gauge-fill');
+    const run = () => fills.forEach(c => {
+      const pct = Math.max(0, Math.min(100, parseFloat(c.getAttribute('data-pct')) || 0));
+      c.style.strokeDashoffset = CIRC * (1 - pct / 100);
+    });
+    const gObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { run(); gObs.disconnect(); } });
+    }, { threshold: 0.35 });
+    gObs.observe(board);
+  })();
 
   // ===== Scroll-triggered count-up on stat numbers =====
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
