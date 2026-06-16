@@ -21,7 +21,6 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3E%3Cdefs%3E%3ClinearGradient%20id='g'%20x1='0'%20y1='0'%20x2='1'%20y2='1'%3E%3Cstop%20offset='0'%20stop-color='%236366F1'/%3E%3Cstop%20offset='.4'%20stop-color='%23A855F7'/%3E%3Cstop%20offset='.7'%20stop-color='%23F472B6'/%3E%3Cstop%20offset='1'%20stop-color='%23FB923C'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width='100'%20height='100'%20rx='26'%20fill='%23000'/%3E%3Crect%20x='3'%20y='3'%20width='94'%20height='94'%20rx='23'%20fill='url(%23g)'/%3E%3Ctext%20x='50'%20y='53'%20dy='.35em'%20text-anchor='middle'%20font-family='Georgia,serif'%20font-style='italic'%20font-weight='600'%20font-size='52'%20fill='%23fff'%3EAS%3C/text%3E%3C/svg%3E">
 
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <style>
   :root {
     --bg-void: #08070d;
@@ -629,10 +628,11 @@
     font-family: 'Fraunces', serif;
     font-size: 88px;
     font-weight: 300;
-    line-height: 0.95;
+    line-height: 1.06;
     letter-spacing: -3px;
     margin-bottom: 32px;
     max-width: 1200px;
+    padding-bottom: 0.06em;
   }
 
   .slide-title .em {
@@ -1205,9 +1205,10 @@
     font-family: 'Fraunces', serif;
     font-size: 80px;
     font-weight: 300;
-    line-height: 0.95;
+    line-height: 1.04;
     letter-spacing: -3px;
     margin-bottom: 20px;
+    padding-bottom: 0.04em;
   }
 
   .case-title .em {
@@ -1690,45 +1691,6 @@
     transform: translate(-50%, calc(100% + 8px));
   }
 
-  /* ====== CHARTS ====== */
-  .chart-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-top: 40px;
-    height: 55vh;
-  }
-
-  .chart-box {
-    background: rgba(15, 13, 25, 0.7);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 32px;
-    backdrop-filter: blur(20px);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .chart-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 1px;
-    background: var(--aurora);
-  }
-
-  .chart-box h3 {
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 11px;
-    margin-bottom: 24px;
-    color: var(--text-muted);
-    letter-spacing: 2.5px;
-    font-weight: 500;
-    text-transform: uppercase;
-  }
-
-  .chart-canvas-wrapper { height: calc(100% - 40px); }
-
   /* ====== PHILOSOPHY ====== */
   .philosophy-grid {
     display: grid;
@@ -1766,13 +1728,14 @@
     font-family: 'Fraunces', serif;
     font-size: 96px;
     font-weight: 300;
-    line-height: 1;
+    line-height: 1.14;
+    padding-bottom: 0.08em;
     background: var(--aurora);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     position: absolute;
-    top: 28px;
+    top: 24px;
     right: 36px;
     letter-spacing: -4px;
     opacity: 0.4;
@@ -1918,6 +1881,46 @@
   }
 
   @keyframes fillBar { from { width: 0; } }
+
+  /* ====== COMPETENCY TIERS (replaces self-rated skill bars) ====== */
+  .comp-tiers { display: flex; flex-direction: column; gap: 28px; }
+
+  .comp-level {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--text-soft);
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+
+  .comp-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+  .comp-dot.expert { background: var(--rose); box-shadow: 0 0 12px var(--rose); }
+  .comp-dot.advanced { background: var(--violet); box-shadow: 0 0 12px var(--violet); }
+  .comp-dot.proficient { background: var(--indigo); box-shadow: 0 0 12px var(--indigo); }
+
+  .comp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+  .comp-chip {
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-bright);
+    border-radius: 50px;
+    font-size: 13px;
+    color: var(--text);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .comp-chip:hover {
+    background: var(--aurora);
+    border-color: transparent;
+    color: #fff;
+    transform: translateY(-2px);
+  }
 
   .tech-section { margin-bottom: 28px; }
 
@@ -2120,6 +2123,81 @@
     margin-top: 12px;
   }
 
+  /* ====== RECOMMENDATIONS CAROUSEL ====== */
+  .rec-carousel { margin-top: 44px; position: relative; }
+  .rec-viewport { overflow: hidden; border-radius: 20px; }
+  .rec-track { display: flex; transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+  .rec-slide { min-width: 100%; box-sizing: border-box; padding: 2px; }
+
+  .rec-carousel .rec-card {
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 48px 56px;
+  }
+
+  .rec-carousel .rec-quote {
+    font-size: 25px;
+    line-height: 1.5;
+    max-width: 920px;
+    margin-bottom: 32px;
+  }
+
+  .rec-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(15, 13, 25, 0.8);
+    border: 1px solid var(--border-bright);
+    color: var(--text-soft);
+    font-size: 22px;
+    line-height: 1;
+    cursor: pointer;
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rec-nav:hover {
+    background: var(--aurora);
+    color: #fff;
+    border-color: transparent;
+    transform: translateY(-50%) scale(1.08);
+    box-shadow: 0 8px 24px rgba(168, 85, 247, 0.4);
+  }
+
+  .rec-prev { left: -18px; }
+  .rec-next { right: -18px; }
+
+  .rec-dots { display: flex; justify-content: center; gap: 8px; margin-top: 26px; }
+
+  .rec-dots button {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .rec-dots button.active {
+    background: var(--rose);
+    width: 26px;
+    border-radius: 4px;
+    box-shadow: 0 0 12px var(--rose);
+  }
+
   /* ====== FINAL ====== */
   .final-content { text-align: center; max-width: 1100px; margin: 0 auto; }
 
@@ -2127,9 +2205,10 @@
     font-family: 'Fraunces', serif;
     font-size: 128px;
     font-weight: 300;
-    line-height: 0.95;
+    line-height: 1.04;
     letter-spacing: -5px;
     margin-bottom: 30px;
+    padding-bottom: 0.04em;
   }
 
   .final-content h1 .em {
@@ -2139,6 +2218,16 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
+  }
+
+  /* Fix: -webkit-background-clip:text paints over the font metric box, so italic
+     descenders (p, g, y) and trailing periods on gradient text were being clipped.
+     padding-bottom enlarges the paint box downward without affecting line layout. */
+  .slide-title .em,
+  .case-title .em,
+  .hero h1 .em,
+  .final-content h1 .em {
+    padding-bottom: 0.22em;
   }
 
   .final-content .tagline {
@@ -2234,7 +2323,7 @@
     .quote-mark, .rec-card .quote-glyph { font-size: 56px; }
     .hero-grid, .two-col, .stat-grid, .projects-grid, .scale-hero,
     .scale-stats, .events-grid, .ops-rhythm, .case-hero, .case-pipeline,
-    .arch-flow, .chart-container, .philosophy-grid, .industry-grid,
+    .arch-flow, .philosophy-grid, .industry-grid,
     .partner-categories, .edu-grid, .rec-grid, .contact-grid {
       grid-template-columns: 1fr !important;
     }
@@ -2275,7 +2364,7 @@
 <div class="counter-hud">
   <span class="counter-current" id="counterCurrent">01</span>
   <span class="counter-sep">/</span>
-  <span>20</span>
+  <span>18</span>
 </div>
 
 <div class="kbd-overlay" id="kbdOverlay">
@@ -2310,7 +2399,7 @@
   <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a><a href="#s5"></a>
   <a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a>
   <a href="#s11"></a><a href="#s12"></a><a href="#s13"></a><a href="#s14"></a><a href="#s15"></a>
-  <a href="#s16"></a><a href="#s17"></a><a href="#s18"></a><a href="#s19"></a><a href="#s20"></a>
+  <a href="#s16"></a><a href="#s17"></a><a href="#s18"></a>
 </div>
 
 <div class="deck">
@@ -2322,7 +2411,7 @@
     <div class="orb" style="width: 350px; height: 350px; background: var(--orange); top: 30%; right: -100px; animation-delay: -5s;"></div>
 
     <div class="eyebrow">The Payments Operator · 2026</div>
-    <div class="slide-num">01 / 20</div>
+    <div class="slide-num">01 / 18</div>
 
     <div class="hero-grid">
       <div class="reveal">
@@ -2399,7 +2488,7 @@
   <section class="slide" id="s2">
     <div class="orb" style="width: 450px; height: 450px; background: var(--violet); top: 10%; right: -150px;"></div>
     <div class="eyebrow">Executive Summary</div>
-    <div class="slide-num">02 / 20</div>
+    <div class="slide-num">02 / 18</div>
 
     <div class="two-col">
       <div class="reveal">
@@ -2435,9 +2524,9 @@
   <section class="slide" id="s3">
     <div class="orb" style="width: 400px; height: 400px; background: var(--indigo); bottom: 0; left: -200px;"></div>
     <div class="eyebrow">Career Journey</div>
-    <div class="slide-num">03 / 20</div>
+    <div class="slide-num">03 / 18</div>
 
-    <h2 class="slide-title reveal">From <span class="em">Chevron to Roku.</span></h2>
+    <h2 class="slide-title reveal">From <span class="em">Chevron to Visa to Roku.</span></h2>
     <p class="slide-sub reveal">Energy data analytics → payments product strategy → AI startup GTM → enterprise payment operations.</p>
 
     <div class="timeline reveal reveal-stagger">
@@ -2445,8 +2534,8 @@
         <div class="tl-date">OCT 2025 — PRESENT</div>
         <div class="tl-role">Payments Operations Manager</div>
         <div class="tl-company">Roku · Roku Pay · San Jose, CA</div>
-        <div class="tl-desc">Own HoB monitoring across core KPIs. Lead cross-functional incident detection. Partner with PSPs (Adyen & Fiserv) to improve auth rates. Build LLM-powered alerting and an autonomous AI bot for bank routing optimization.</div>
-        <div class="tl-wins"><span class="win-chip">Auth Rate</span><span class="win-chip">LLM Alerting</span><span class="win-chip">PSP Partnerships</span><span class="win-chip">AI Routing Bot</span></div>
+        <div class="tl-desc">Own HoB monitoring across core KPIs. Lead cross-functional incident detection. Partner with PSPs (Adyen & Fiserv) to improve auth rates. Build LLM-powered alerting and an autonomous AI bot for bank routing optimization. Manage a senior data analyst.</div>
+        <div class="tl-wins"><span class="win-chip">Auth Rate</span><span class="win-chip">LLM Alerting</span><span class="win-chip">PSP Partnerships</span><span class="win-chip">AI Routing Bot</span><span class="win-chip">Manage Sr. Analyst</span></div>
       </div>
 
       <div class="tl-item">
@@ -2476,12 +2565,51 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S4: ROKU PAY AT SCALE (NEW) ============ -->
+  <!-- ============ S4: SIGNATURE WINS ============ -->
   <section class="slide" id="s4">
+    <div class="orb" style="width: 480px; height: 480px; background: var(--gold); top: -140px; left: -120px;"></div>
+    <div class="orb" style="width: 420px; height: 420px; background: var(--violet); bottom: -120px; right: -100px; animation-delay: -8s;"></div>
+    <div class="eyebrow">Career Highlights · Signature Wins</div>
+    <div class="slide-num">04 / 18</div>
+
+    <h2 class="slide-title reveal">A few <span class="em">career-defining</span> wins.</h2>
+    <p class="slide-sub reveal">Across Chevron, Visa, and Roku — the moments that earned executive recognition and reset what "good" looks like.</p>
+
+    <div class="stat-grid reveal reveal-stagger" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="stat-card">
+        <div class="num">$1B</div>
+        <div class="label">CEO-recognized 4-year dispute forecast · Visa</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">$150M</div>
+        <div class="label">AANR delivered via pricing strategy · Visa</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">2,500+</div>
+        <div class="label">POS terminals · NFL &amp; MLB Tap to Pay · Visa</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">RPG</div>
+        <div class="label">Autonomous two-agent bank routing · Roku</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">~$1.5M</div>
+        <div class="label">Revenue protected by early detection · Roku</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">90%</div>
+        <div class="label">Faster reporting via automation · Chevron</div>
+      </div>
+    </div>
+    <div class="mark">AS · MMXXVI</div>
+  </section>
+
+  <!-- ============ S5: ROKU PAY AT SCALE ============ -->
+  <section class="slide" id="s5">
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -150px; left: -150px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -100px; right: -100px; animation-delay: -7s;"></div>
     <div class="eyebrow">Roku Pay · The Scope</div>
-    <div class="slide-num">04 / 20</div>
+    <div class="slide-num">05 / 18</div>
 
     <div class="scale-hero">
       <div class="reveal">
@@ -2521,11 +2649,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S5: WHAT I OWN AT ROKU ============ -->
-  <section class="slide" id="s5">
+  <!-- ============ S6: WHAT I OWN AT ROKU ============ -->
+  <section class="slide" id="s6">
     <div class="orb" style="width: 500px; height: 500px; background: var(--rose); top: -150px; right: -150px;"></div>
     <div class="eyebrow">Roku · What I Own</div>
-    <div class="slide-num">05 / 20</div>
+    <div class="slide-num">06 / 18</div>
 
     <h2 class="slide-title reveal">Driving payment health, <span class="em">end-to-end.</span></h2>
     <p class="slide-sub reveal">Real-time monitoring, incident leadership, partner coordination, and AI-native operational tooling.</p>
@@ -2534,14 +2662,8 @@
       <div class="project-card">
         <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg></div>
         <h3>HoB Core KPI Monitoring</h3>
-        <p>Own house-of-brand monitoring across auth rate, conversion, cancellations, tokenizations, errors, and COGs.</p>
+        <p>Own house-of-brand monitoring across auth rate, conversion, cancellations, tokenization, errors & COGs — plus the monthly Core Payments OKR deck.</p>
         <div class="impact-tag">DAILY OWNERSHIP</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/></svg></div>
-        <h3>Cross-Functional Incident Detection</h3>
-        <p>Lead end-to-end detection and resolution workflows. Drove the monitoring & escalation playbook that catches issues hours earlier.</p>
-        <div class="impact-tag">SYSTEM RELIABILITY</div>
       </div>
       <div class="project-card">
         <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M16 3.13a4 4 0 010 7.75M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87"/></svg></div>
@@ -2550,38 +2672,64 @@
         <div class="impact-tag">AUTH RATE ↑</div>
       </div>
       <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <h3>Executive KPI/OKR Reporting</h3>
-        <p>Own the monthly Core Payments & Analytics OKR deck — KPIs, health, cost optimization, executive narrative.</p>
-        <div class="impact-tag">LEADERSHIP VISIBILITY</div>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h8"/></svg></div>
+        <h3>Monitoring, Alerting & RCA</h3>
+        <p>Authored Roku's Monitoring & Escalation Playbook and built the LLM-assisted alerting + root-cause log that filters noise and catches incidents hours earlier.</p>
+        <div class="impact-tag">AI-ASSISTED RUNBOOK</div>
+      </div>
+      <div class="project-card" style="border-color: var(--border-bright);">
+        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Senior-Leader PII Leak — Solved</h3>
+        <p>Customers were seeing a senior leader's personal cell & email on card statements — a misconfigured processor MID. I traced it with our Fraud Manager, escalated with the network & PSP, and drove a <strong>confirmed fix — info fully scrubbed.</strong></p>
+        <div class="impact-tag">RESOLVED · PII</div>
       </div>
       <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h8"/></svg></div>
-        <h3>LLM-Powered Alerting</h3>
-        <p>Building intelligent alerting that filters noise, prioritizes incidents, and streamlines escalation workflows.</p>
-        <div class="impact-tag">AI-DRIVEN</div>
+        <div class="icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg></div>
+        <h3>World Cup 2026 Readiness</h3>
+        <p>Kicked off the World Cup streaming-event playbook (modeled on the Super Bowl runbook), mapping partners — Fubo, YouTube TV, Hulu, DirecTV, Vix & Peacock — ahead of the rush.</p>
+        <div class="impact-tag">PROACTIVE</div>
       </div>
       <div class="project-card">
         <div class="icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
         <h3>Roku Pay Guardian (RPG)</h3>
-        <p>Flagship AI agent — autonomous bank routing optimization. Two agents, zero approvals, always on. Architecture next →</p>
-        <div class="impact-tag">FLAGSHIP · S7—S8</div>
+        <p>Flagship AI agent — autonomous bank routing optimization. Two agents, zero approvals, always on. Deep dive ahead →</p>
+        <div class="impact-tag">FLAGSHIP · S8—S9</div>
       </div>
     </div>
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S6: TENTPOLE EVENT READINESS (NEW) ============ -->
-  <section class="slide" id="s6">
+  <!-- ============ S7: TENTPOLE EVENT READINESS ============ -->
+  <section class="slide" id="s7">
     <div class="orb" style="width: 500px; height: 500px; background: var(--orange); top: -100px; right: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--violet); bottom: -100px; left: -100px; animation-delay: -8s;"></div>
     <div class="eyebrow">Operating Rhythm · Tentpole Events</div>
-    <div class="slide-num">06 / 20</div>
+    <div class="slide-num">07 / 18</div>
 
     <h2 class="slide-title reveal">On-call when the <span class="em">whole world</span> presses play.</h2>
     <p class="slide-sub reveal">Designated Payments Ops DRI for streaming's biggest moments — hourly health checks, executive snapshots, zero tolerance for downtime.</p>
 
     <div class="events-grid reveal reveal-stagger">
+      <div class="event-card">
+        <div class="event-icon">★</div>
+        <div class="event-name">Super Bowl LX</div>
+        <div class="event-date">FEB 2026 · PAYMENTS DRI</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">★</div>
+        <div class="event-name">F1 Australian GP</div>
+        <div class="event-date">MAR 2026</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">★</div>
+        <div class="event-name">UFC 326</div>
+        <div class="event-date">MAR 2026</div>
+      </div>
+      <div class="event-card">
+        <div class="event-icon">★</div>
+        <div class="event-name">March Madness</div>
+        <div class="event-date">MAR 2026 · TOURNAMENT</div>
+      </div>
       <div class="event-card">
         <div class="event-icon">★</div>
         <div class="event-name">UFC 327</div>
@@ -2594,13 +2742,13 @@
       </div>
       <div class="event-card">
         <div class="event-icon">★</div>
-        <div class="event-name">F1 Australian GP</div>
-        <div class="event-date">MAR 2026</div>
+        <div class="event-name">FIFA World Cup</div>
+        <div class="event-date">JUN 2026 · LIVE MONITORING</div>
       </div>
       <div class="event-card">
         <div class="event-icon">★</div>
-        <div class="event-name">UFC 326</div>
-        <div class="event-date">MAR 2026</div>
+        <div class="event-name">UFC Freedom 250</div>
+        <div class="event-date">JUN 2026 · PPV</div>
       </div>
     </div>
 
@@ -2624,12 +2772,12 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S7: RPG CASE STUDY ============ -->
-  <section class="slide" id="s7">
+  <!-- ============ S8: RPG CASE STUDY ============ -->
+  <section class="slide" id="s8">
     <div class="orb" style="width: 600px; height: 600px; background: var(--violet); top: -200px; right: -200px;"></div>
     <div class="orb" style="width: 500px; height: 500px; background: var(--orange); bottom: -250px; left: -200px; animation-delay: -8s;"></div>
     <div class="eyebrow">Case Study · Flagship Project</div>
-    <div class="slide-num">07 / 20</div>
+    <div class="slide-num">08 / 18</div>
 
     <div class="case-hero">
       <div class="reveal">
@@ -2678,12 +2826,12 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S8: RPG ARCHITECTURE (INTERACTIVE) ============ -->
-  <section class="slide" id="s8">
+  <!-- ============ S9: RPG ARCHITECTURE (INTERACTIVE) ============ -->
+  <section class="slide" id="s9">
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); top: -150px; left: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -150px; right: -100px; animation-delay: -10s;"></div>
     <div class="eyebrow">RPG · System Architecture</div>
-    <div class="slide-num">08 / 20</div>
+    <div class="slide-num">09 / 18</div>
 
     <h2 class="slide-title reveal" style="font-size: 72px;">The <span class="em">two-agent loop,</span> visualized.</h2>
     <p class="slide-sub reveal">Hover any node to inspect its role. Signal flows left-to-right; the system loops back to itself, always.</p>
@@ -2828,12 +2976,12 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S9: MEXICO MARKET LEADERSHIP (NEW) ============ -->
-  <section class="slide" id="s9">
+  <!-- ============ S10: MEXICO MARKET LEADERSHIP ============ -->
+  <section class="slide" id="s10">
     <div class="orb" style="width: 520px; height: 520px; background: #1f8a4c; top: -140px; left: -120px;"></div>
     <div class="orb" style="width: 420px; height: 420px; background: #d4263a; bottom: -120px; right: -80px; animation-delay: -9s;"></div>
     <div class="eyebrow">Market Leadership · &#127474;&#127485; Mexico</div>
-    <div class="slide-num">09 / 20</div>
+    <div class="slide-num">10 / 18</div>
 
     <h2 class="slide-title reveal">Leading Roku's <span class="em">Mexico payments</span> expansion.</h2>
     <p class="slide-sub reveal">The go-to owner for Mexico payment health &mdash; senior leaders route MX questions here. Driving testing, diagnosis, and fixes across PSPs, issuers, and engineering.</p>
@@ -2881,108 +3029,15 @@
     <div class="mark">AS &middot; MMXXVI</div>
   </section>
 
-  <!-- ============ S10: END-TO-END OWNERSHIP (NEW) ============ -->
-  <section class="slide" id="s10">
-    <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); top: -120px; right: -120px;"></div>
-    <div class="orb" style="width: 400px; height: 400px; background: var(--gold); bottom: -140px; left: -100px; animation-delay: -7s;"></div>
-    <div class="eyebrow">Ownership · End-to-End Execution</div>
-    <div class="slide-num">10 / 20</div>
-
-    <h2 class="slide-title reveal">Problems I owned <span class="em">start to finish.</span></h2>
-    <p class="slide-sub reveal">When something slips through the cracks, I run it down &mdash; across partners, engineering, and execs &mdash; until it's closed.</p>
-
-    <div class="projects-grid reveal reveal-stagger" style="grid-template-columns: 1fr 1fr;">
-      <div class="project-card" style="border-color: var(--border-bright);">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <h3>A Senior-Leader PII Leak &mdash; Solved</h3>
-        <p>Customers were seeing a senior leader's personal cell &amp; email on their card statements &mdash; a misconfigured payment-processor MID. I traced it to MID-level config with our Fraud Manager, escalated directly with the card network &amp; PSP, and drove it to a <strong>confirmed fix &mdash; personal info fully scrubbed.</strong></p>
-        <div class="impact-tag">RESOLVED &middot; PII</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg></div>
-        <h3>Monitoring &amp; Escalation Playbook</h3>
-        <p>Authored Roku's Payments Processing Monitoring &amp; Escalation Playbook &mdash; the runbook that catches incidents hours earlier and standardizes how the team responds.</p>
-        <div class="impact-tag">COMPANY RUNBOOK</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4M8 16h8"/></svg></div>
-        <h3>Alerts &amp; RCA System</h3>
-        <p>Own the incident alerts &amp; root-cause log plus the LLM-assisted alerting that filters noise, prioritizes incidents, and routes escalations.</p>
-        <div class="impact-tag">AI-ASSISTED</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20M12 2a15 15 0 000 20"/></svg></div>
-        <h3>World Cup 2026 Readiness</h3>
-        <p>Kicked off the World Cup streaming-event playbook (modeled on the Super Bowl runbook), mapping partners &mdash; Fubo, YouTube TV, Hulu, DirecTV, Vix &amp; Peacock &mdash; ahead of the rush.</p>
-        <div class="impact-tag">PROACTIVE</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div>
-        <h3>OKR &amp; Core KPI Reporting</h3>
-        <p>Own the monthly Core Payments OKR deck and Roku Pay Core KPIs &mdash; the executive narrative on payment health, auth performance, and cost.</p>
-        <div class="impact-tag">EXEC REPORTING</div>
-      </div>
-      <div class="project-card">
-        <div class="icon-wrap"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0122 16.92z"/></svg></div>
-        <h3>Descriptor CS-Number Fix</h3>
-        <p>Took ownership of correcting the Mexico customer-service number on card descriptors (+52 800 910 7070), coordinating the change directly with Adyen.</p>
-        <div class="impact-tag">PARTNER OPS</div>
-      </div>
-    </div>
-    <div class="mark">AS &middot; MMXXVI</div>
-  </section>
-
   <!-- ============ S11: REVENUE PROTECTED (NEW) ============ -->
   <section class="slide" id="s11">
     <div class="orb" style="width: 520px; height: 520px; background: var(--mint); top: -140px; right: -120px;"></div>
     <div class="orb" style="width: 420px; height: 420px; background: var(--gold); bottom: -120px; left: -100px; animation-delay: -8s;"></div>
     <div class="eyebrow">Quantified Impact &middot; Revenue Protected</div>
-    <div class="slide-num">11 / 20</div>
+    <div class="slide-num">11 / 18</div>
 
     <h2 class="slide-title reveal">Catching it early, <span class="em">before it compounds.</span></h2>
-    <p class="slide-sub reveal">Payment incidents never stay small &mdash; an unaddressed issuer block or broken purchase flow compounds week over week. Daily monitoring lets me contain them at the source.</p>
-
-    <div class="reveal" style="display:grid; grid-template-columns: 0.85fr 1.15fr; gap: 44px; align-items:center; max-width:1100px; margin: 14px auto 0;">
-
-      <div style="text-align:left;">
-        <div style="font-family:'Fraunces',serif; font-weight:800; font-size:104px; line-height:0.92; background:var(--aurora); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;">~$1.5M</div>
-        <div style="font-size:17px; color:var(--text-soft); margin-top:12px; max-width:380px; line-height:1.5;">in revenue protected by early detection &mdash; the gap between catching an incident at the source and letting it run unmitigated.</div>
-        <div style="display:flex; gap:32px; margin-top:30px;">
-          <div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:38px;color:var(--text);">121</div><div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-top:2px;">metrics watched daily<br>across 5 regions</div></div>
-          <div><div style="font-family:'Fraunces',serif;font-weight:700;font-size:38px;color:var(--text);">8&nbsp;/&nbsp;20</div><div style="font-size:11px;letter-spacing:.09em;text-transform:uppercase;color:var(--text-muted);margin-top:2px;">incidents caught<br>proactively</div></div>
-        </div>
-      </div>
-
-      <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border); border-radius:20px; padding:30px 32px;">
-        <div style="font-size:12px; letter-spacing:.11em; text-transform:uppercase; color:var(--text-muted); margin-bottom:24px;">Cost of a single incident, left to run</div>
-
-        <div style="margin-bottom:22px;">
-          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:9px;"><span style="color:var(--mint); font-weight:600;">Caught &amp; contained</span><span style="font-weight:800; color:var(--text);">~$250K</span></div>
-          <div style="height:14px; border-radius:8px; background:rgba(255,255,255,0.06); overflow:hidden;"><div style="width:14%; height:100%; border-radius:8px; background:var(--mint);"></div></div>
-        </div>
-        <div style="margin-bottom:22px;">
-          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:9px;"><span style="color:var(--gold); font-weight:600;">If unaddressed ~30 days</span><span style="font-weight:800; color:var(--text);">~$750K</span></div>
-          <div style="height:14px; border-radius:8px; background:rgba(255,255,255,0.06); overflow:hidden;"><div style="width:43%; height:100%; border-radius:8px; background:var(--gold);"></div></div>
-        </div>
-        <div style="margin-bottom:6px;">
-          <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:9px;"><span style="color:var(--rose); font-weight:600;">If left ~90 days</span><span style="font-weight:800; color:var(--text);">~$1.75M</span></div>
-          <div style="height:14px; border-radius:8px; background:rgba(255,255,255,0.06); overflow:hidden;"><div style="width:100%; height:100%; border-radius:8px; background:var(--rose);"></div></div>
-        </div>
-        <div style="font-size:12px; color:var(--text-muted); margin-top:18px; border-top:1px solid var(--border); padding-top:15px; line-height:1.5;">I catch issues at the first tier &mdash; same-day failover routing, partner escalation, and root-cause fixes keep them from compounding.</div>
-      </div>
-    </div>
-    <div class="mark">AS &middot; MMXXVI</div>
-  </section>
-
-  <!-- ============ S12: BEFORE / AFTER (NEW) ============ -->
-  <section class="slide" id="s12">
-    <div class="orb" style="width: 480px; height: 480px; background: var(--rose); top: -120px; left: -100px;"></div>
-    <div class="orb" style="width: 460px; height: 460px; background: var(--mint); bottom: -120px; right: -100px; animation-delay: -9s;"></div>
-    <div class="eyebrow">Transformation &middot; Before &amp; After</div>
-    <div class="slide-num">12 / 20</div>
-
-    <h2 class="slide-title reveal">Before &amp; after I owned <span class="em">payment monitoring.</span></h2>
-    <p class="slide-sub reveal">Incidents used to surface late and run for weeks. I built the monitoring, escalation, and AI-assisted alerting that turns reactive cleanup into same-day containment.</p>
+    <p class="slide-sub reveal">Payment incidents never stay small &mdash; an issuer block or broken purchase flow compounds week over week. The monitoring, escalation, and AI-assisted alerting I built turn reactive cleanup into same-day containment. Here's the before &amp; after of owning payment monitoring.</p>
 
     <div class="reveal" style="display:grid; grid-template-columns: 1fr auto 1fr; gap:22px; align-items:stretch; max-width:1080px; margin:18px auto 0;">
 
@@ -3022,14 +3077,15 @@
         </ul>
       </div>
     </div>
+    <p class="reveal" style="text-align:center; font-size:13px; color:var(--text-muted); max-width:820px; margin:24px auto 0; line-height:1.6;">Left to run, a single incident compounds fast &mdash; <strong style="color:var(--text-soft);">~$250K</strong> caught same-day, <strong style="color:var(--text-soft);">~$750K</strong> at 30 days, <strong style="color:var(--text-soft);">~$1.75M</strong> by 90. Early detection is the whole game.</p>
     <div class="mark">AS &middot; MMXXVI</div>
   </section>
 
   <!-- ============ S13: VISA WINS ============ -->
-  <section class="slide" id="s13">
+  <section class="slide" id="s12">
     <div class="orb" style="width: 450px; height: 450px; background: var(--rose); top: 20%; right: -200px;"></div>
     <div class="eyebrow">Visa · Product Wins</div>
-    <div class="slide-num">13 / 20</div>
+    <div class="slide-num">12 / 18</div>
 
     <h2 class="slide-title reveal">Two years. <span class="em">Career-defining</span> wins.</h2>
     <p class="slide-sub reveal">North America Product & Solutions — from CEO-recognized forecasts to landmark sports partnerships.</p>
@@ -3063,32 +3119,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S14: IMPACT CHARTS ============ -->
-  <section class="slide" id="s14">
-    <div class="eyebrow">Measurable Impact</div>
-    <div class="slide-num">14 / 20</div>
-
-    <h2 class="slide-title reveal">Numbers that <span class="em">tell the story.</span></h2>
-    <p class="slide-sub reveal">Revenue generated, efficiency gained, and operational scale delivered across five years of work.</p>
-
-    <div class="chart-container reveal">
-      <div class="chart-box">
-        <h3>Revenue & Forecast Impact · Visa Tenure</h3>
-        <div class="chart-canvas-wrapper"><canvas id="chart1"></canvas></div>
-      </div>
-      <div class="chart-box">
-        <h3>Operational Efficiency · Before vs After</h3>
-        <div class="chart-canvas-wrapper"><canvas id="chart2"></canvas></div>
-      </div>
-    </div>
-    <div class="mark">AS · MMXXVI</div>
-  </section>
-
   <!-- ============ S15: INDUSTRY FOOTPRINT ============ -->
-  <section class="slide" id="s15">
+  <section class="slide" id="s13">
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); bottom: -200px; right: -200px;"></div>
     <div class="eyebrow">Industry Footprint</div>
-    <div class="slide-num">15 / 20</div>
+    <div class="slide-num">13 / 18</div>
 
     <h2 class="slide-title reveal">Partners across <span class="em">payments & sport.</span></h2>
     <p class="slide-sub reveal">Networks, PSPs, issuers, and leagues — relationships that span the global payments stack.</p>
@@ -3122,10 +3157,10 @@
   </section>
 
   <!-- ============ S16: PHILOSOPHY ============ -->
-  <section class="slide" id="s16">
+  <section class="slide" id="s14">
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -100px; left: -100px;"></div>
     <div class="eyebrow">How I Operate</div>
-    <div class="slide-num">16 / 20</div>
+    <div class="slide-num">14 / 18</div>
 
     <h2 class="slide-title reveal">Four <span class="em">principles</span> I work by.</h2>
     <p class="slide-sub reveal">The operating system behind every initiative, dashboard, and decision.</p>
@@ -3156,29 +3191,45 @@
   </section>
 
   <!-- ============ S17: SKILLS ============ -->
-  <section class="slide" id="s17">
+  <section class="slide" id="s15">
     <div class="orb" style="width: 500px; height: 500px; background: var(--rose); top: 20%; right: -250px;"></div>
     <div class="eyebrow">Technical Toolkit</div>
-    <div class="slide-num">17 / 20</div>
+    <div class="slide-num">15 / 18</div>
 
     <h2 class="slide-title reveal">A <span class="em">multidisciplinary</span> stack.</h2>
     <p class="slide-sub reveal">Payment domain depth, analytics tooling, and cutting-edge AI workflows.</p>
 
     <div class="two-col reveal" style="margin-top: 30px;">
-      <div class="skill-bars">
-        <div class="skill-item"><div class="skill-label"><span>Payments Operations</span><span class="pct">98</span></div><div class="skill-bar"><div class="skill-fill" style="width: 98%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>SQL & Data Analysis</span><span class="pct">94</span></div><div class="skill-bar"><div class="skill-fill" style="width: 94%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>Product Management</span><span class="pct">92</span></div><div class="skill-bar"><div class="skill-fill" style="width: 92%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>Python / R</span><span class="pct">90</span></div><div class="skill-bar"><div class="skill-fill" style="width: 90%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>BI · Tableau / Power BI</span><span class="pct">93</span></div><div class="skill-bar"><div class="skill-fill" style="width: 93%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>AI / LLM Workflows</span><span class="pct">88</span></div><div class="skill-bar"><div class="skill-fill" style="width: 88%;"></div></div></div>
-        <div class="skill-item"><div class="skill-label"><span>Cross-Functional Leadership</span><span class="pct">95</span></div><div class="skill-bar"><div class="skill-fill" style="width: 95%;"></div></div></div>
+      <div class="comp-tiers">
+        <div class="comp-tier">
+          <div class="comp-level"><span class="comp-dot expert"></span>Expert</div>
+          <div class="comp-chips">
+            <span class="comp-chip">Payments Operations</span>
+            <span class="comp-chip">Cross-Functional Leadership</span>
+            <span class="comp-chip">Incident Detection &amp; RCA</span>
+          </div>
+        </div>
+        <div class="comp-tier">
+          <div class="comp-level"><span class="comp-dot advanced"></span>Advanced</div>
+          <div class="comp-chips">
+            <span class="comp-chip">SQL &amp; Data Analysis</span>
+            <span class="comp-chip">BI · Tableau / Power BI</span>
+            <span class="comp-chip">Product Management</span>
+          </div>
+        </div>
+        <div class="comp-tier">
+          <div class="comp-level"><span class="comp-dot proficient"></span>Proficient</div>
+          <div class="comp-chips">
+            <span class="comp-chip">Python / R</span>
+            <span class="comp-chip">AI / LLM Workflows</span>
+          </div>
+        </div>
       </div>
 
       <div>
         <div class="tech-section"><h4>Programming</h4><div class="tech-tags"><span class="tech-tag">Python</span><span class="tech-tag">R</span><span class="tech-tag">SQL</span><span class="tech-tag">Stata</span><span class="tech-tag">Pandas</span><span class="tech-tag">Docker</span><span class="tech-tag">Shiny</span></div></div>
         <div class="tech-section"><h4>BI & Analytics</h4><div class="tech-tags"><span class="tech-tag">Tableau</span><span class="tech-tag">Power BI</span><span class="tech-tag">Excel</span><span class="tech-tag">Jupyter</span><span class="tech-tag">Apptio</span></div></div>
-        <div class="tech-section"><h4>Ops & Monitoring</h4><div class="tech-tags"><span class="tech-tag">Grafana</span><span class="tech-tag">DataDog</span><span class="tech-tag">Power Automate</span><span class="tech-tag">Hubspot</span></div></div>
+        <div class="tech-section"><h4>Ops & Monitoring</h4><div class="tech-tags"><span class="tech-tag">Grafana</span><span class="tech-tag">DataDog</span><span class="tech-tag">Pagos Pulse</span><span class="tech-tag">Power Automate</span><span class="tech-tag">Hubspot</span></div></div>
         <div class="tech-section"><h4>AI / LLM</h4><div class="tech-tags"><span class="tech-tag">Claude Code</span><span class="tech-tag">Codex</span><span class="tech-tag">ChatGPT</span></div></div>
         <div class="tech-section"><h4>Certifications</h4><div class="tech-tags"><span class="tech-tag">Product Manager Cert</span><span class="tech-tag">Lean Six Sigma · Green Belt</span><span class="tech-tag">Excel Modeling</span></div></div>
       </div>
@@ -3187,10 +3238,10 @@
   </section>
 
   <!-- ============ S18: EDUCATION ============ -->
-  <section class="slide" id="s18">
+  <section class="slide" id="s16">
     <div class="orb" style="width: 400px; height: 400px; background: var(--indigo); bottom: -100px; left: -100px;"></div>
     <div class="eyebrow">Education</div>
-    <div class="slide-num">18 / 20</div>
+    <div class="slide-num">16 / 18</div>
 
     <h2 class="slide-title reveal">Foundations in <span class="em">business, data, & strategy.</span></h2>
     <p class="slide-sub reveal">From economics undergrad to a Berkeley MBA — three pillars supporting a payments leadership career.</p>
@@ -3216,48 +3267,105 @@
   </section>
 
   <!-- ============ S19: RECOMMENDATIONS ============ -->
-  <section class="slide" id="s19">
+  <section class="slide" id="s17">
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -200px; right: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -100px; left: -100px;"></div>
     <div class="eyebrow">What Others Say</div>
-    <div class="slide-num">19 / 20</div>
+    <div class="slide-num">17 / 18</div>
 
     <h2 class="slide-title reveal">In their <span class="em">own words.</span></h2>
     <p class="slide-sub reveal">A selection from <strong style="color:var(--text);">17 LinkedIn recommendations</strong> — managers, peers, and mentees.</p>
 
-    <div class="rec-grid reveal reveal-stagger">
-      <div class="rec-card">
-        <div class="quote-glyph">"</div>
-        <p class="rec-quote">Aman always brings a can-do attitude, intellectual curiosity and keen eye for detail that makes collaborating with him a joy.</p>
-        <div class="rec-author"><div class="rec-avatar">JW</div><div><div class="rec-name">Jeff Wang</div><div class="rec-role">Collaborator · Visa</div></div></div>
+    <div class="rec-carousel reveal">
+      <button class="rec-nav rec-prev" aria-label="Previous recommendation">&#8249;</button>
+      <button class="rec-nav rec-next" aria-label="Next recommendation">&#8250;</button>
+      <div class="rec-viewport">
+        <div class="rec-track" id="recTrack">
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">Aman always brings a can-do attitude, intellectual curiosity and keen eye for detail that makes collaborating with him a joy.</p>
+              <div class="rec-author"><div class="rec-avatar">JW</div><div><div class="rec-name">Jeff Wang</div><div class="rec-role">Product · Visa</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">He is tremendous at proactively delivering results in a timely manner, consistently showcasing his data expertise.</p>
+              <div class="rec-author"><div class="rec-avatar">AL</div><div><div class="rec-name">Alan Lam</div><div class="rec-role">Director, Post-Purchase Products · Visa</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">An extraordinary asset on the North America product team — sharp, curious, and quick to automate. He built amazing pipeline-tracking tools and several data workflows in R. A very strong analytical thinker.</p>
+              <div class="rec-author"><div class="rec-avatar">TV</div><div><div class="rec-name">Tomás Villena</div><div class="rec-role">Product Leader · Managed Aman</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">Thoughtful, organized, and always willing to go the extra mile to make sure projects and reports were executed on time. He would be a great asset on any team.</p>
+              <div class="rec-author"><div class="rec-avatar">KI</div><div><div class="rec-name">Kelly Iwarimie</div><div class="rec-role">Financial Services &amp; Payments · Visa</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">Aman has an exceptional ability to transform complex data into insightful, actionable information — always looking to automate and streamline. A driven, skillful, dedicated colleague.</p>
+              <div class="rec-author"><div class="rec-avatar">ED</div><div><div class="rec-name">Ethan Drechsler</div><div class="rec-role">Product · Strategy &amp; Operations</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">Aman's versatility on the Tap to Pay team — from reporting and data analytics to electric-vehicle charging payments — let him manage many tasks promptly and efficiently.</p>
+              <div class="rec-author"><div class="rec-avatar">CK</div><div><div class="rec-name">Cindy Kohler</div><div class="rec-role">Visa · Payments Technology</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">A compassionate and insightful mentor, especially in the field of data and economics. His guidance shaped both my academic and career trajectory.</p>
+              <div class="rec-author"><div class="rec-avatar">AN</div><div><div class="rec-name">Amy Nguyen</div><div class="rec-role">Data Science, Economics &amp; Strategy</div></div></div>
+            </div>
+          </div>
+
+          <div class="rec-slide">
+            <div class="rec-card">
+              <div class="quote-glyph">"</div>
+              <p class="rec-quote">Thoughtful, collaborative, and always willing to take on new challenges. A great team player.</p>
+              <div class="rec-author"><div class="rec-avatar">BR</div><div><div class="rec-name">Brian Redmond, MBA</div><div class="rec-role">IT Strategy &amp; Planning Leader</div></div></div>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="rec-card">
-        <div class="quote-glyph">"</div>
-        <p class="rec-quote">Aman is a compassionate and insightful mentor, especially in the field of data and economics. His guidance shaped both my academic and career trajectory.</p>
-        <div class="rec-author"><div class="rec-avatar">AN</div><div><div class="rec-name">Amy N.</div><div class="rec-role">Mentee</div></div></div>
-      </div>
-      <a class="rec-card" href="https://www.linkedin.com/in/amansinghh/" target="_blank" rel="noopener" style="text-decoration:none; color:inherit; display:block;">
-        <div class="quote-glyph">"</div>
-        <p class="rec-quote">A rare combination of strategic thinker and detail-driven operator — Aman delivers the work and brings the team along with him.</p>
-        <div class="rec-author"><div class="rec-avatar">+15</div><div><div class="rec-name">15 more recommendations</div><div class="rec-role">linkedin.com/in/amansinghh</div></div></div>
-      </a>
+      <div class="rec-dots" id="recDots"></div>
     </div>
 
     <div class="rec-stats reveal">
       <div class="rec-stat"><div class="num">17</div><div class="label">Recommendations</div></div>
-      <div class="rec-stat"><div class="num">500+</div><div class="label">Connections</div></div>
+      <div class="rec-stat"><div class="num">3K+</div><div class="label">Connections</div></div>
       <div class="rec-stat"><div class="num">3K</div><div class="label">Followers</div></div>
     </div>
     <div class="mark">AS · MMXXVI</div>
   </section>
 
   <!-- ============ S20: CONNECT ============ -->
-  <section class="slide" id="s20">
+  <section class="slide" id="s18">
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); top: 10%; left: 10%;"></div>
     <div class="orb" style="width: 450px; height: 450px; background: var(--rose); bottom: 5%; right: 5%; animation-delay: -8s;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--orange); top: 40%; right: 30%; animation-delay: -15s;"></div>
     <div class="eyebrow">Let's Connect</div>
-    <div class="slide-num">20 / 20</div>
+    <div class="slide-num">18 / 18</div>
 
     <div class="final-content reveal">
       <h1>Let's build the<br><span class="em">future of payments.</span></h1>
@@ -3318,12 +3426,21 @@
   const slides = document.querySelectorAll('.slide');
   const navDots = document.querySelectorAll('.nav-dots a');
 
+  // Current slide = the section occupying the deck's vertical midpoint.
+  // Robust to slides taller than one viewport (plain scroll math overshoots).
+  function getCurrentSlideIndex() {
+    const mid = deck.getBoundingClientRect().top + deck.clientHeight / 2;
+    let idx = 0;
+    slides.forEach((s, i) => { if (s.getBoundingClientRect().top <= mid) idx = i; });
+    return idx;
+  }
+
   deck.addEventListener('scroll', () => {
     const max = deck.scrollHeight - deck.clientHeight;
     const pct = (deck.scrollTop / max) * 100;
     progressFill.style.width = pct + '%';
 
-    const current = Math.round(deck.scrollTop / deck.clientHeight);
+    const current = getCurrentSlideIndex();
     const newNum = String(current + 1).padStart(2, '0');
     if (counterCurrent.textContent !== newNum) {
       counterCurrent.style.opacity = '0';
@@ -3414,7 +3531,7 @@
   });
 
   deck.addEventListener('scroll', () => {
-    currentSlide = Math.round(deck.scrollTop / deck.clientHeight);
+    currentSlide = getCurrentSlideIndex();
   });
 
   // ===== Easter egg: triple click on logo mark =====
@@ -3433,158 +3550,40 @@
     });
   });
 
-  // ===== Charts (guarded — skip gracefully if CDN is blocked in embed) =====
-  if (window.Chart && document.getElementById('chart1')) {
+  // ===== Recommendations carousel =====
+  (function () {
+    const track = document.getElementById('recTrack');
+    if (!track) return;
+    const slides = Array.from(track.children);
+    const dotsWrap = document.getElementById('recDots');
+    let idx = 0, timer = null;
 
-  // ===== Chart 1: Visa Revenue Impact — CLEAN AXIS =====
-  const ctx1 = document.getElementById('chart1').getContext('2d');
-  new Chart(ctx1, {
-    type: 'bar',
-    data: {
-      labels: ['Client Wins', 'AANR Pricing', 'Dispute Forecast'],
-      datasets: [{
-        data: [5, 150, 1000],
-        backgroundColor: (ctx) => {
-          const chart = ctx.chart;
-          const { ctx: c, chartArea } = chart;
-          if (!chartArea) return null;
-          const g = c.createLinearGradient(chartArea.left, 0, chartArea.right, 0);
-          g.addColorStop(0, 'rgba(99, 102, 241, 0.9)');
-          g.addColorStop(0.5, 'rgba(168, 85, 247, 0.9)');
-          g.addColorStop(1, 'rgba(244, 114, 182, 0.9)');
-          return g;
-        },
-        borderRadius: 6,
-        borderWidth: 0,
-        barThickness: 32
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      indexAxis: 'y',
-      animation: { duration: 1400, easing: 'easeOutQuart' },
-      layout: { padding: { right: 60 } },
-      plugins: {
-        legend: { display: false },
-        tooltip: {
-          callbacks: { label: (ctx) => {
-            const v = ctx.parsed.x;
-            return v >= 1000 ? '$' + (v/1000).toFixed(v % 1000 === 0 ? 0 : 1) + 'B' : '$' + v + 'M';
-          }},
-          backgroundColor: 'rgba(8, 7, 13, 0.95)',
-          padding: 14,
-          borderColor: 'rgba(244, 114, 182, 0.4)',
-          borderWidth: 1,
-          titleFont: { family: 'JetBrains Mono', size: 11 },
-          bodyFont: { family: 'Inter', size: 13 }
-        },
-        // value labels on each bar
-        datalabels: false
-      },
-      scales: {
-        x: {
-          type: 'logarithmic',
-          min: 1,
-          max: 2000,
-          afterBuildTicks: (axis) => {
-            axis.ticks = [
-              { value: 1 },
-              { value: 10 },
-              { value: 100 },
-              { value: 1000 }
-            ];
-          },
-          ticks: {
-            color: '#94A3B8',
-            font: { family: 'JetBrains Mono', size: 11 },
-            callback: (v) => v >= 1000 ? '$' + (v/1000) + 'B' : '$' + v + 'M',
-            autoSkip: false
-          },
-          grid: { color: 'rgba(255,255,255,0.04)', drawTicks: false }
-        },
-        y: {
-          ticks: {
-            color: '#F8FAFC',
-            font: { family: 'Inter', size: 13, weight: '500' }
-          },
-          grid: { display: false }
-        }
-      }
-    },
-    plugins: [{
-      // Draw value labels at the end of each bar
-      id: 'valueLabels',
-      afterDatasetsDraw(chart) {
-        const { ctx } = chart;
-        chart.data.datasets[0].data.forEach((v, i) => {
-          const meta = chart.getDatasetMeta(0).data[i];
-          if (!meta) return;
-          const label = v >= 1000 ? '$' + (v/1000) + 'B' : '$' + v + 'M';
-          ctx.save();
-          ctx.fillStyle = '#F8FAFC';
-          ctx.font = '500 14px Inter';
-          ctx.textBaseline = 'middle';
-          ctx.fillText(label, meta.x + 12, meta.y);
-          ctx.restore();
-        });
-      }
-    }]
-  });
+    slides.forEach((_, i) => {
+      const b = document.createElement('button');
+      b.setAttribute('aria-label', 'Go to recommendation ' + (i + 1));
+      if (i === 0) b.classList.add('active');
+      b.addEventListener('click', () => { go(i); restart(); });
+      dotsWrap.appendChild(b);
+    });
+    const dots = Array.from(dotsWrap.children);
 
-  // ===== Chart 2: Efficiency Radar =====
-  const ctx2 = document.getElementById('chart2').getContext('2d');
-  new Chart(ctx2, {
-    type: 'radar',
-    data: {
-      labels: ['Reporting Speed', 'Pipeline Calc Time', 'POS Coverage', 'TTP Revenue', 'Auth Rate Visibility', 'Incident Detection'],
-      datasets: [{
-        label: 'Before',
-        data: [10, 10, 0, 50, 30, 25],
-        backgroundColor: 'rgba(99, 102, 241, 0.15)',
-        borderColor: 'rgba(99, 102, 241, 0.9)',
-        borderWidth: 1.5,
-        pointBackgroundColor: 'rgba(99, 102, 241, 1)',
-        pointRadius: 3
-      }, {
-        label: 'After Aman',
-        data: [100, 100, 95, 70, 95, 90],
-        backgroundColor: 'rgba(244, 114, 182, 0.18)',
-        borderColor: 'rgba(244, 114, 182, 1)',
-        borderWidth: 2,
-        pointBackgroundColor: 'rgba(244, 114, 182, 1)',
-        pointRadius: 4
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      animation: { duration: 1400, easing: 'easeOutQuart' },
-      plugins: {
-        legend: {
-          labels: {
-            color: '#CBD5E1',
-            font: { family: 'JetBrains Mono', size: 11, weight: '500' },
-            padding: 18,
-            usePointStyle: true,
-            pointStyle: 'circle'
-          },
-          position: 'top'
-        }
-      },
-      scales: {
-        r: {
-          angleLines: { color: 'rgba(255,255,255,0.06)' },
-          grid: { color: 'rgba(255,255,255,0.06)' },
-          pointLabels: { color: '#CBD5E1', font: { family: 'Inter', size: 10, weight: '500' } },
-          ticks: { display: false },
-          min: 0, max: 100
-        }
-      }
+    function go(n) {
+      idx = (n + slides.length) % slides.length;
+      track.style.transform = 'translateX(-' + (idx * 100) + '%)';
+      dots.forEach((d, i) => d.classList.toggle('active', i === idx));
     }
-  });
+    function next() { go(idx + 1); }
+    function prev() { go(idx - 1); }
+    function restart() { if (timer) clearInterval(timer); timer = setInterval(next, 5500); }
 
-  } // end chart guard
+    document.querySelector('.rec-next').addEventListener('click', () => { next(); restart(); });
+    document.querySelector('.rec-prev').addEventListener('click', () => { prev(); restart(); });
+
+    const carousel = document.querySelector('.rec-carousel');
+    carousel.addEventListener('mouseenter', () => { if (timer) clearInterval(timer); });
+    carousel.addEventListener('mouseleave', restart);
+    restart();
+  })();
 </script>
 
 </body>
