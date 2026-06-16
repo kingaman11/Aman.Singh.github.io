@@ -2424,6 +2424,9 @@
   .geo-node.mx text { fill: var(--rose); }
   .geo-pulse { fill: none; stroke: var(--rose); }
   .geo-map.visible .geo-pulse { animation: geoPulse 2.4s ease-out infinite; }
+  .geo-map.visible .geo-arc { opacity: 1; }
+  .geo-cap { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
+  .geo-cap b { color: var(--rose); font-weight: 600; }
 
   @keyframes geoPulse { 0% { r: 7; opacity: 0.7; } 100% { r: 30; opacity: 0; } }
 
@@ -3157,9 +3160,27 @@
     <div class="eyebrow">Market Leadership · &#127474;&#127485; Mexico</div>
     <div class="slide-num">10 / 18</div>
 
-    <h2 class="slide-title reveal">Leading Roku's <span class="em">Mexico payments</span> expansion.</h2>
-    <p class="slide-sub reveal">The go-to owner for Mexico payment health &mdash; senior leaders route MX questions here. Driving testing, diagnosis, and fixes across PSPs, issuers, and engineering.</p>
-    <div class="reveal" style="width:150px; height:4px; border-radius:4px; margin:16px 0 0; background:linear-gradient(90deg,#006847 0 33.33%,#ffffff 33.33% 66.66%,#ce1126 66.66% 100%); box-shadow:0 0 16px rgba(206,17,38,0.3);"></div>
+    <div style="display:grid; grid-template-columns: 1.25fr 1fr; gap:44px; align-items:center;">
+      <div>
+        <h2 class="slide-title reveal" style="margin-bottom:18px;">Leading Roku's <span class="em">Mexico payments</span> expansion.</h2>
+        <p class="slide-sub reveal" style="margin-bottom:14px;">The go-to owner for Mexico payment health &mdash; senior leaders route MX questions here. Driving testing, diagnosis, and fixes across PSPs, issuers, and engineering.</p>
+        <div class="reveal" style="width:150px; height:4px; border-radius:4px; background:linear-gradient(90deg,#006847 0 33.33%,#ffffff 33.33% 66.66%,#ce1126 66.66% 100%); box-shadow:0 0 16px rgba(206,17,38,0.3);"></div>
+      </div>
+      <div class="geo-map reveal" style="margin:0;">
+        <svg class="geo-svg" viewBox="0 0 660 140" preserveAspectRatio="xMidYMid meet">
+          <path class="geo-grid" d="M10,82 Q330,104 650,82"/>
+          <path class="geo-grid" d="M20,46 Q330,62 640,46"/>
+          <path class="geo-arc" d="M120,46 Q250,-6 380,52"/>
+          <path class="geo-arc" d="M380,52 Q470,6 552,80"/>
+          <path class="geo-arc" d="M120,46 Q118,72 150,82"/>
+          <g class="geo-node"><circle class="geo-pt" cx="120" cy="46" r="5"/><text x="120" y="30" text-anchor="middle">N. AMERICA</text></g>
+          <g class="geo-node mx"><circle class="geo-pulse" cx="150" cy="82" r="7"/><circle class="geo-pt" cx="150" cy="82" r="6"/><text x="150" y="108" text-anchor="middle">MEXICO &#9733;</text></g>
+          <g class="geo-node"><circle class="geo-pt" cx="380" cy="52" r="5"/><text x="380" y="38" text-anchor="middle">EMEA</text></g>
+          <g class="geo-node"><circle class="geo-pt" cx="552" cy="80" r="5"/><text x="552" y="104" text-anchor="middle">APAC</text></g>
+        </svg>
+        <div class="geo-cap">Roku payments span 5 regions — focus: <b>Mexico</b></div>
+      </div>
+    </div>
 
     <div class="projects-grid reveal reveal-stagger" style="grid-template-columns: 1fr 1fr;">
       <div class="project-card">
@@ -3253,7 +3274,24 @@
         </ul>
       </div>
     </div>
-    <p class="reveal" style="text-align:center; font-size:13px; color:var(--text-muted); max-width:820px; margin:24px auto 0; line-height:1.6;">Left to run, a single incident compounds fast &mdash; <strong style="color:var(--text-soft);">~$250K</strong> caught same-day, <strong style="color:var(--text-soft);">~$750K</strong> at 30 days, <strong style="color:var(--text-soft);">~$1.75M</strong> by 90. Early detection is the whole game.</p>
+    <div class="spark-wrap reveal">
+      <div class="spark-head">
+        <span class="spark-title">Trailing 8-week renewal auth rate · watched daily</span>
+        <span class="spark-note">incident detected &amp; contained same-day</span>
+      </div>
+      <svg class="spark-svg" viewBox="0 0 600 100" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="sparkArea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(110,231,183,0.28)"/>
+            <stop offset="1" stop-color="rgba(110,231,183,0)"/>
+          </linearGradient>
+        </defs>
+        <line class="spark-base" x1="0" y1="30" x2="600" y2="30"/>
+        <path class="spark-area" d="M0,34 L85.7,30 L171.4,38 L257.1,82 L342.9,56 L428.6,36 L514.3,32 L600,30 L600,100 L0,100 Z"/>
+        <path class="spark-line" pathLength="1" d="M0,34 L85.7,30 L171.4,38 L257.1,82 L342.9,56 L428.6,36 L514.3,32 L600,30"/>
+      </svg>
+    </div>
+    <p class="reveal" style="text-align:center; font-size:12.5px; color:var(--text-muted); max-width:820px; margin:10px auto 0; line-height:1.55;">Left unmanaged, one incident compounds &mdash; <strong style="color:var(--text-soft);">~$250K</strong> same-day &rarr; <strong style="color:var(--text-soft);">~$750K</strong> at 30 days &rarr; <strong style="color:var(--text-soft);">~$1.75M</strong> by 90. Early detection is the whole game.</p>
     <div class="mark">AS &middot; MMXXVI</div>
   </section>
 
@@ -3653,6 +3691,31 @@
       entries.forEach(e => { if (e.isIntersecting) { run(); gObs.disconnect(); } });
     }, { threshold: 0.35 });
     gObs.observe(board);
+  })();
+
+  // ===== Animate magnitude bars + auth-rate sparkline on scroll-in =====
+  (function () {
+    document.querySelectorAll('.mag-fill').forEach(f => {
+      const o = new IntersectionObserver((es) => {
+        es.forEach(e => { if (e.isIntersecting) { f.style.width = (parseFloat(f.getAttribute('data-w')) || 0) + '%'; o.disconnect(); } });
+      }, { threshold: 0.5 });
+      o.observe(f);
+    });
+    const spark = document.querySelector('.spark-wrap');
+    if (spark) {
+      const line = spark.querySelector('.spark-line');
+      const area = spark.querySelector('.spark-area');
+      const o = new IntersectionObserver((es) => {
+        es.forEach(e => {
+          if (e.isIntersecting) {
+            if (line) line.style.strokeDashoffset = '0';
+            if (area) area.style.opacity = '1';
+            o.disconnect();
+          }
+        });
+      }, { threshold: 0.4 });
+      o.observe(spark);
+    }
   })();
 
   // ===== Scroll-triggered count-up on stat numbers =====
