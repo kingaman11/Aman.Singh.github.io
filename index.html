@@ -2428,6 +2428,32 @@
   .geo-cap { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; }
   .geo-cap b { color: var(--rose); font-weight: 600; }
 
+  /* ====== PAYMENT FLOW (animated particle diagram) ====== */
+  .pay-flow { margin-top: 30px; position: relative; width: 100%; max-width: 1180px; margin-left: auto; margin-right: auto; }
+  .pf-timing {
+    position: absolute; top: -8px; right: 4px;
+    font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 2px;
+    color: var(--mint); text-transform: uppercase; display: flex; align-items: center; gap: 8px; z-index: 2;
+  }
+  .pf-timing::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); box-shadow: 0 0 10px var(--mint); animation: livePulse 2s infinite; }
+  .pf-svg { width: 100%; height: auto; display: block; overflow: visible; }
+  .pf-wire { stroke: rgba(255,255,255,0.18); stroke-width: 1.5; stroke-dasharray: 3 4; fill: none; }
+  .pf-failover-wire { stroke: rgba(252,211,77,0.55); stroke-width: 1.5; stroke-dasharray: 5 5; fill: none; }
+  .pf-card { fill: url(#pfNode); stroke: rgba(255,255,255,0.16); stroke-width: 1; }
+  .pf-accent { fill: url(#pfAccent); }
+  .pf-n-title { fill: var(--text); font-family: 'Fraunces', serif; font-size: 22px; font-weight: 400; }
+  .pf-n-sub { fill: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 1px; }
+  .pf-node.ok .pf-card { stroke: rgba(110,231,183,0.55); }
+  .pf-node.ok .pf-accent { fill: var(--mint); }
+  .pf-node.alert .pf-card { stroke: rgba(252,211,77,0.5); }
+  .pf-step { fill: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1.5px; }
+  .pf-fo-label { fill: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 1px; }
+  .pf-tag { font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: 1px; }
+  .pf-tag.decline { fill: var(--rose); }
+  .pf-tag.retry { fill: var(--mint); }
+  .pf-particle { filter: url(#pfGlow); }
+  @media (prefers-reduced-motion: reduce) { .pf-particle animateMotion { animation: none; } }
+
   @keyframes geoPulse { 0% { r: 7; opacity: 0.7; } 100% { r: 30; opacity: 0; } }
 
   @media (prefers-reduced-motion: reduce) {
@@ -2500,7 +2526,7 @@
 <div class="counter-hud">
   <span class="counter-current" id="counterCurrent">01</span>
   <span class="counter-sep">/</span>
-  <span>18</span>
+  <span>19</span>
 </div>
 
 <div class="kbd-overlay" id="kbdOverlay">
@@ -2535,7 +2561,7 @@
   <a href="#s1"></a><a href="#s2"></a><a href="#s3"></a><a href="#s4"></a><a href="#s5"></a>
   <a href="#s6"></a><a href="#s7"></a><a href="#s8"></a><a href="#s9"></a><a href="#s10"></a>
   <a href="#s11"></a><a href="#s12"></a><a href="#s13"></a><a href="#s14"></a><a href="#s15"></a>
-  <a href="#s16"></a><a href="#s17"></a><a href="#s18"></a>
+  <a href="#s16"></a><a href="#s17"></a><a href="#s18"></a><a href="#s19"></a>
 </div>
 
 <div class="deck">
@@ -2547,7 +2573,7 @@
     <div class="orb" style="width: 350px; height: 350px; background: var(--orange); top: 30%; right: -100px; animation-delay: -5s;"></div>
 
     <div class="eyebrow">The Payments Operator · 2026</div>
-    <div class="slide-num">01 / 18</div>
+    <div class="slide-num">01 / 19</div>
 
     <div class="hero-grid">
       <div class="reveal">
@@ -2624,7 +2650,7 @@
   <section class="slide" id="s2">
     <div class="orb" style="width: 450px; height: 450px; background: var(--violet); top: 10%; right: -150px;"></div>
     <div class="eyebrow">Executive Summary</div>
-    <div class="slide-num">02 / 18</div>
+    <div class="slide-num">02 / 19</div>
 
     <div class="two-col">
       <div class="reveal">
@@ -2660,7 +2686,7 @@
   <section class="slide" id="s3">
     <div class="orb" style="width: 400px; height: 400px; background: var(--indigo); bottom: 0; left: -200px;"></div>
     <div class="eyebrow">Career Journey</div>
-    <div class="slide-num">03 / 18</div>
+    <div class="slide-num">03 / 19</div>
 
     <h2 class="slide-title reveal">From <span class="em">Chevron to Visa to Roku.</span></h2>
     <p class="slide-sub reveal">Energy data analytics → payments product strategy → AI startup GTM → enterprise payment operations.</p>
@@ -2706,7 +2732,7 @@
     <div class="orb" style="width: 480px; height: 480px; background: var(--gold); top: -140px; left: -120px;"></div>
     <div class="orb" style="width: 420px; height: 420px; background: var(--violet); bottom: -120px; right: -100px; animation-delay: -8s;"></div>
     <div class="eyebrow">Career Highlights · Signature Wins</div>
-    <div class="slide-num">04 / 18</div>
+    <div class="slide-num">04 / 19</div>
 
     <h2 class="slide-title reveal">A few <span class="em">career-defining</span> wins.</h2>
     <p class="slide-sub reveal">Across Chevron, Visa, and Roku — the moments that earned executive recognition and reset what "good" looks like.</p>
@@ -2745,7 +2771,7 @@
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -150px; left: -150px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -100px; right: -100px; animation-delay: -7s;"></div>
     <div class="eyebrow">Roku Pay · The Scope</div>
-    <div class="slide-num">05 / 18</div>
+    <div class="slide-num">05 / 19</div>
 
     <div class="scale-hero">
       <div class="reveal">
@@ -2830,7 +2856,7 @@
   <section class="slide" id="s6">
     <div class="orb" style="width: 500px; height: 500px; background: var(--rose); top: -150px; right: -150px;"></div>
     <div class="eyebrow">Roku · What I Own</div>
-    <div class="slide-num">06 / 18</div>
+    <div class="slide-num">06 / 19</div>
 
     <h2 class="slide-title reveal">Driving payment health, <span class="em">end-to-end.</span></h2>
     <p class="slide-sub reveal">Real-time monitoring, incident leadership, partner coordination, and AI-native operational tooling.</p>
@@ -2881,7 +2907,7 @@
     <div class="orb" style="width: 500px; height: 500px; background: var(--orange); top: -100px; right: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--violet); bottom: -100px; left: -100px; animation-delay: -8s;"></div>
     <div class="eyebrow">Operating Rhythm · Tentpole Events</div>
-    <div class="slide-num">07 / 18</div>
+    <div class="slide-num">07 / 19</div>
 
     <h2 class="slide-title reveal">On-call when the <span class="em">whole world</span> presses play.</h2>
     <p class="slide-sub reveal">Designated Payments Ops DRI for streaming's biggest moments — hourly health checks, executive snapshots, zero tolerance for downtime.</p>
@@ -2954,7 +2980,7 @@
     <div class="orb" style="width: 600px; height: 600px; background: var(--violet); top: -200px; right: -200px;"></div>
     <div class="orb" style="width: 500px; height: 500px; background: var(--orange); bottom: -250px; left: -200px; animation-delay: -8s;"></div>
     <div class="eyebrow">Case Study · Flagship Project</div>
-    <div class="slide-num">08 / 18</div>
+    <div class="slide-num">08 / 19</div>
 
     <div class="case-hero">
       <div class="reveal">
@@ -3008,7 +3034,7 @@
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); top: -150px; left: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -150px; right: -100px; animation-delay: -10s;"></div>
     <div class="eyebrow">RPG · System Architecture</div>
-    <div class="slide-num">09 / 18</div>
+    <div class="slide-num">09 / 19</div>
 
     <h2 class="slide-title reveal" style="font-size: 72px;">The <span class="em">two-agent loop,</span> visualized.</h2>
     <p class="slide-sub reveal">Hover any node to inspect its role. Signal flows left-to-right; the system loops back to itself, always.</p>
@@ -3153,12 +3179,110 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S10: MEXICO MARKET LEADERSHIP ============ -->
+  <!-- ============ S10: PAYMENT FLOW (animated) ============ -->
   <section class="slide" id="s10">
+    <div class="orb" style="width: 520px; height: 520px; background: var(--indigo); top: -150px; right: -120px;"></div>
+    <div class="orb" style="width: 420px; height: 420px; background: var(--mint); bottom: -130px; left: -110px; animation-delay: -9s;"></div>
+    <div class="eyebrow">Under the Hood · Transaction Lifecycle</div>
+    <div class="slide-num">10 / 19</div>
+
+    <h2 class="slide-title reveal">Anatomy of a <span class="em">payment.</span></h2>
+    <p class="slide-sub reveal">Every Roku Pay transaction races through five hops in ~2 seconds. When an issuer declines, the system auto-reroutes to an alternate PSP and retries &mdash; the full path I monitor end-to-end.</p>
+
+    <div class="pay-flow reveal">
+      <div class="pf-timing">&#8776; 2s end-to-end &middot; monitored live</div>
+      <svg class="pf-svg" viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="pfNode" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(255,255,255,0.06)"/>
+            <stop offset="1" stop-color="rgba(255,255,255,0.015)"/>
+          </linearGradient>
+          <linearGradient id="pfAccent" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#6366F1"/><stop offset="0.5" stop-color="#A855F7"/><stop offset="1" stop-color="#F472B6"/>
+          </linearGradient>
+          <filter id="pfGlow" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3.2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+        </defs>
+
+        <path id="pfc1" class="pf-wire" d="M140,105 H212"/>
+        <path id="pfc2" class="pf-wire" d="M352,105 H424"/>
+        <path id="pfc3" class="pf-wire" d="M564,105 H636"/>
+        <path id="pfc4" class="pf-wire" d="M776,105 H848"/>
+        <path id="pfc5" class="pf-wire" d="M988,105 H1060"/>
+
+        <path id="pffo" class="pf-failover-wire" d="M918,150 C918,300 494,300 494,150"/>
+        <text class="pf-fo-label" x="706" y="300" text-anchor="middle">decline &rarr; auto-reroute to alternate PSP &rarr; retry</text>
+        <text class="pf-tag decline" x="918" y="172" text-anchor="middle">&#10007; declined</text>
+        <text class="pf-tag retry" x="494" y="172" text-anchor="middle">&#8635; retry</text>
+
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0s"><mpath href="#pfc1"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.5s"><mpath href="#pfc1"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.1s"><mpath href="#pfc2"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.6s"><mpath href="#pfc2"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.2s"><mpath href="#pfc3"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.7s"><mpath href="#pfc3"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.3s"><mpath href="#pfc4"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.8s"><mpath href="#pfc4"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.4s"><mpath href="#pfc5"/></animateMotion></circle>
+        <circle class="pf-particle" r="4" fill="#6EE7B7"><animateMotion dur="1s" repeatCount="indefinite" begin="0.9s"><mpath href="#pfc5"/></animateMotion></circle>
+        <circle class="pf-particle" r="4.5" fill="#FCD34D"><animateMotion dur="2.6s" repeatCount="indefinite" begin="1.2s"><mpath href="#pffo"/></animateMotion></circle>
+
+        <g class="pf-node">
+          <rect class="pf-card" x="0" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="14" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="70" y="86" text-anchor="middle">01</text>
+          <text class="pf-n-title" x="70" y="113" text-anchor="middle">Customer</text>
+          <text class="pf-n-sub" x="70" y="133" text-anchor="middle">Roku app</text>
+        </g>
+        <g class="pf-node">
+          <rect class="pf-card" x="212" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="226" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="282" y="86" text-anchor="middle">02</text>
+          <text class="pf-n-title" x="282" y="113" text-anchor="middle">Pay Method</text>
+          <text class="pf-n-sub" x="282" y="133" text-anchor="middle">card / wallet</text>
+        </g>
+        <g class="pf-node alert">
+          <rect class="pf-card" x="424" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="438" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="494" y="86" text-anchor="middle">03</text>
+          <text class="pf-n-title" x="494" y="113" text-anchor="middle">PSP</text>
+          <text class="pf-n-sub" x="494" y="133" text-anchor="middle">Adyen &middot; Fiserv</text>
+        </g>
+        <g class="pf-node">
+          <rect class="pf-card" x="636" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="650" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="706" y="86" text-anchor="middle">04</text>
+          <text class="pf-n-title" x="706" y="113" text-anchor="middle">Network</text>
+          <text class="pf-n-sub" x="706" y="133" text-anchor="middle">card rails</text>
+        </g>
+        <g class="pf-node alert">
+          <rect class="pf-card" x="848" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="862" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="918" y="86" text-anchor="middle">05</text>
+          <text class="pf-n-title" x="918" y="113" text-anchor="middle">Issuer</text>
+          <text class="pf-n-sub" x="918" y="133" text-anchor="middle">auth call</text>
+        </g>
+        <g class="pf-node ok">
+          <rect class="pf-card" x="1060" y="60" width="140" height="90" rx="14"/>
+          <rect class="pf-accent" x="1074" y="60" width="112" height="3" rx="1.5"/>
+          <text class="pf-step" x="1130" y="86" text-anchor="middle">&#10003;</text>
+          <text class="pf-n-title" x="1130" y="113" text-anchor="middle">Approved</text>
+          <text class="pf-n-sub" x="1130" y="133" text-anchor="middle">sub active</text>
+        </g>
+      </svg>
+    </div>
+
+    <div class="mark">AS &middot; MMXXVI</div>
+  </section>
+
+  <!-- ============ S11: MEXICO MARKET LEADERSHIP ============ -->
+  <section class="slide" id="s11">
     <div class="orb" style="width: 520px; height: 520px; background: #1f8a4c; top: -140px; left: -120px;"></div>
     <div class="orb" style="width: 420px; height: 420px; background: #d4263a; bottom: -120px; right: -80px; animation-delay: -9s;"></div>
     <div class="eyebrow">Market Leadership · &#127474;&#127485; Mexico</div>
-    <div class="slide-num">10 / 18</div>
+    <div class="slide-num">11 / 19</div>
 
     <div style="display:grid; grid-template-columns: 1.25fr 1fr; gap:44px; align-items:center;">
       <div>
@@ -3224,12 +3348,12 @@
     <div class="mark">AS &middot; MMXXVI</div>
   </section>
 
-  <!-- ============ S11: REVENUE PROTECTED (NEW) ============ -->
-  <section class="slide" id="s11">
+  <!-- ============ S12: REVENUE PROTECTED (NEW) ============ -->
+  <section class="slide" id="s12">
     <div class="orb" style="width: 520px; height: 520px; background: var(--mint); top: -140px; right: -120px;"></div>
     <div class="orb" style="width: 420px; height: 420px; background: var(--gold); bottom: -120px; left: -100px; animation-delay: -8s;"></div>
     <div class="eyebrow">Quantified Impact &middot; Revenue Protected</div>
-    <div class="slide-num">11 / 18</div>
+    <div class="slide-num">12 / 19</div>
 
     <h2 class="slide-title reveal">Catching it early, <span class="em">before it compounds.</span></h2>
     <p class="slide-sub reveal">Payment incidents never stay small &mdash; an issuer block or broken purchase flow compounds week over week. The monitoring, escalation, and AI-assisted alerting I built turn reactive cleanup into same-day containment. Here's the before &amp; after of owning payment monitoring.</p>
@@ -3295,11 +3419,11 @@
     <div class="mark">AS &middot; MMXXVI</div>
   </section>
 
-  <!-- ============ S13: VISA WINS ============ -->
-  <section class="slide" id="s12">
+  <!-- ============ S14: VISA WINS ============ -->
+  <section class="slide" id="s13">
     <div class="orb" style="width: 450px; height: 450px; background: var(--rose); top: 20%; right: -200px;"></div>
     <div class="eyebrow">Visa · Product Wins</div>
-    <div class="slide-num">12 / 18</div>
+    <div class="slide-num">13 / 19</div>
 
     <h2 class="slide-title reveal">Two years. <span class="em">Career-defining</span> wins.</h2>
     <p class="slide-sub reveal">North America Product & Solutions — from CEO-recognized forecasts to landmark sports partnerships.</p>
@@ -3333,11 +3457,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S15: INDUSTRY FOOTPRINT ============ -->
-  <section class="slide" id="s13">
+  <!-- ============ S16: INDUSTRY FOOTPRINT ============ -->
+  <section class="slide" id="s14">
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); bottom: -200px; right: -200px;"></div>
     <div class="eyebrow">Industry Footprint</div>
-    <div class="slide-num">13 / 18</div>
+    <div class="slide-num">14 / 19</div>
 
     <h2 class="slide-title reveal">Partners across <span class="em">payments & sport.</span></h2>
     <p class="slide-sub reveal">Networks, PSPs, issuers, and leagues — relationships that span the global payments stack.</p>
@@ -3370,11 +3494,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S16: PHILOSOPHY ============ -->
-  <section class="slide" id="s14">
+  <!-- ============ S17: PHILOSOPHY ============ -->
+  <section class="slide" id="s15">
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -100px; left: -100px;"></div>
     <div class="eyebrow">How I Operate</div>
-    <div class="slide-num">14 / 18</div>
+    <div class="slide-num">15 / 19</div>
 
     <h2 class="slide-title reveal">Four <span class="em">principles</span> I work by.</h2>
     <p class="slide-sub reveal">The operating system behind every initiative, dashboard, and decision.</p>
@@ -3404,11 +3528,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S17: SKILLS ============ -->
-  <section class="slide" id="s15">
+  <!-- ============ S18: SKILLS ============ -->
+  <section class="slide" id="s16">
     <div class="orb" style="width: 500px; height: 500px; background: var(--rose); top: 20%; right: -250px;"></div>
     <div class="eyebrow">Technical Toolkit</div>
-    <div class="slide-num">15 / 18</div>
+    <div class="slide-num">16 / 19</div>
 
     <h2 class="slide-title reveal">A <span class="em">multidisciplinary</span> stack.</h2>
     <p class="slide-sub reveal">Payment domain depth, analytics tooling, and cutting-edge AI workflows.</p>
@@ -3451,11 +3575,11 @@
     <div class="mark">AS · MMXXVI</div>
   </section>
 
-  <!-- ============ S18: EDUCATION ============ -->
-  <section class="slide" id="s16">
+  <!-- ============ S19: EDUCATION ============ -->
+  <section class="slide" id="s17">
     <div class="orb" style="width: 400px; height: 400px; background: var(--indigo); bottom: -100px; left: -100px;"></div>
     <div class="eyebrow">Education</div>
-    <div class="slide-num">16 / 18</div>
+    <div class="slide-num">17 / 19</div>
 
     <h2 class="slide-title reveal">Foundations in <span class="em">business, data, & strategy.</span></h2>
     <p class="slide-sub reveal">From economics undergrad to a Berkeley MBA — three pillars supporting a payments leadership career.</p>
@@ -3481,11 +3605,11 @@
   </section>
 
   <!-- ============ S19: RECOMMENDATIONS ============ -->
-  <section class="slide" id="s17">
+  <section class="slide" id="s18">
     <div class="orb" style="width: 500px; height: 500px; background: var(--violet); top: -200px; right: -100px;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--rose); bottom: -100px; left: -100px;"></div>
     <div class="eyebrow">What Others Say</div>
-    <div class="slide-num">17 / 18</div>
+    <div class="slide-num">18 / 19</div>
 
     <h2 class="slide-title reveal">In their <span class="em">own words.</span></h2>
     <p class="slide-sub reveal">A selection from <strong style="color:var(--text);">17 LinkedIn recommendations</strong> — managers, peers, and mentees.</p>
@@ -3574,12 +3698,12 @@
   </section>
 
   <!-- ============ S20: CONNECT ============ -->
-  <section class="slide" id="s18">
+  <section class="slide" id="s19">
     <div class="orb" style="width: 500px; height: 500px; background: var(--indigo); top: 10%; left: 10%;"></div>
     <div class="orb" style="width: 450px; height: 450px; background: var(--rose); bottom: 5%; right: 5%; animation-delay: -8s;"></div>
     <div class="orb" style="width: 400px; height: 400px; background: var(--orange); top: 40%; right: 30%; animation-delay: -15s;"></div>
     <div class="eyebrow">Let's Connect</div>
-    <div class="slide-num">18 / 18</div>
+    <div class="slide-num">19 / 19</div>
 
     <div class="final-content reveal">
       <h1>Let's build the<br><span class="em">future of payments.</span></h1>
